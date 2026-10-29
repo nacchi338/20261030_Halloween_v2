@@ -6,380 +6,103 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎃 ハロウィンルーレット</title>
 <style>
-:root {
-  --purple: #542080;
-  --orange: #ff982e;
-  --dark: #180e27;
-  --panel: #29183b;
-  --cream: #fff5dc;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  min-height: 100vh;
-  color: var(--cream);
-  font-family: system-ui, -apple-system, "Noto Sans JP", sans-serif;
-  background:
-    radial-gradient(ellipse at top, #49205f 0%, transparent 55%),
-    linear-gradient(160deg, #160d25, #28113c 70%, #120b1b);
-  text-align: center;
-  padding: 22px 12px 40px;
-}
-header { max-width: 650px; margin: 0 auto 18px; }
-h1 { font-size: clamp(25px, 6vw, 38px); margin: 8px 0; }
-.subtitle { color: #e4c8f8; font-size: 14px; }
-.tabs {
-  display: flex;
-  gap: 8px;
-  max-width: 540px;
-  margin: 20px auto;
-}
-.tab {
-  flex: 1;
-  padding: 13px 8px;
-  border: 2px solid #765091;
-  border-radius: 14px;
-  background: #2b1940;
-  color: white;
-  font-weight: 800;
-  font-size: 15px;
-  cursor: pointer;
-}
-.tab.active {
-  background: var(--orange);
-  border-color: #ffcc79;
-  color: #2b1238;
-}
-.panel {
-  display: none;
-  max-width: 650px;
-  margin: 0 auto;
-  padding: 18px 14px 24px;
-  background: rgba(28, 16, 43, .88);
-  border: 1px solid #684184;
-  border-radius: 22px;
-  box-shadow: 0 12px 35px #09050d88;
-}
-.panel.active { display: block; }
-.panel h2 { margin: 2px 0 8px; font-size: 23px; }
-.description { color: #d6c0e7; font-size: 13px; margin: 0 0 16px; }
-.wheel-wrap {
-  position: relative;
-  width: min(84vw, 390px);
-  margin: 0 auto 18px;
-}
-canvas {
-  width: 100%;
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 5px 12px #0007);
-}
-.pointer {
-  position: absolute;
-  z-index: 2;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 17px solid transparent;
-  border-right: 17px solid transparent;
-  border-top: 36px solid #fff4c9;
-  filter: drop-shadow(0 2px 3px #000);
-}
-.spin {
-  width: min(100%, 330px);
-  padding: 16px 20px;
-  border: 0;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #ffbd55, #ff812c);
-  color: #32133e;
-  font-size: 21px;
-  font-weight: 900;
-  cursor: pointer;
-  box-shadow: 0 5px 0 #9c4b19;
-}
-.spin:active { transform: translateY(2px); box-shadow: 0 3px 0 #9c4b19; }
-.spin:disabled { opacity: .55; cursor: wait; }
-.result {
-  margin: 20px auto 0;
-  padding: 16px 12px;
-  border: 2px dashed #f5b84e;
-  border-radius: 16px;
-  background: #3a204d;
-  max-width: 500px;
-  min-height: 82px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  overflow-wrap: anywhere;
-}
-.result-label { font-size: 12px; color: #e4c8f8; margin-bottom: 6px; }
-.result-text { font-size: clamp(19px, 4.5vw, 25px); font-weight: 900; line-height: 1.55; }
-.result-text.dialogue { font-size: clamp(17px, 4vw, 21px); }
-.item-list {
-  text-align: left;
-  max-width: 500px;
-  margin: 20px auto 0;
-  padding: 12px 15px;
-  background: #21142f;
-  border-radius: 14px;
-}
-.item-list summary { cursor: pointer; font-weight: 800; color: #ffca72; }
-.item-list ol { padding-left: 24px; line-height: 1.8; font-size: 13px; }
-.item-list li { padding: 2px 0; overflow-wrap: anywhere; }
-footer { margin-top: 20px; color: #bda6d0; font-size: 12px; }
+:root{--purple:#542080;--orange:#ff982e;--cream:#fff5dc}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;background:radial-gradient(ellipse at top,#49205f 0%,transparent 55%),linear-gradient(160deg,#160d25,#28113c 70%,#120b1b);text-align:center;padding:22px 12px 40px}
+header{max-width:650px;margin:0 auto 18px}h1{font-size:clamp(25px,6vw,38px);margin:8px 0}.subtitle{color:#e4c8f8;font-size:14px}
+.tabs{display:flex;gap:8px;max-width:540px;margin:20px auto}.tab{flex:1;padding:13px 8px;border:2px solid #765091;border-radius:14px;background:#2b1940;color:white;font-weight:800;font-size:15px;cursor:pointer}.tab.active{background:var(--orange);border-color:#ffcc79;color:#2b1238}
+.panel{display:none;max-width:650px;margin:0 auto;padding:18px 14px 24px;background:rgba(28,16,43,.88);border:1px solid #684184;border-radius:22px;box-shadow:0 12px 35px #09050d88}.panel.active{display:block}.panel h2{margin:2px 0 8px;font-size:23px}.description{color:#d6c0e7;font-size:13px;margin:0 0 16px}
+.wheel-wrap{position:relative;width:min(84vw,390px);margin:0 auto 18px}canvas{width:100%;height:auto;display:block;filter:drop-shadow(0 5px 12px #0007)}
+.pointer{position:absolute;z-index:2;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:17px solid transparent;border-right:17px solid transparent;border-top:36px solid #fff4c9;filter:drop-shadow(0 2px 3px #000)}
+.spin{width:min(100%,330px);padding:16px 20px;border:0;border-radius:999px;background:linear-gradient(135deg,#ffbd55,#ff812c);color:#32133e;font-size:21px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #9c4b19}.spin:active{transform:translateY(2px);box-shadow:0 3px 0 #9c4b19}.spin:disabled{opacity:.55;cursor:wait}
+.sound-note{font-size:12px;color:#d6c0e7;margin:12px 0 0}
+.result{margin:20px auto 0;padding:16px 12px;border:2px dashed #f5b84e;border-radius:16px;background:#3a204d;max-width:500px;min-height:82px;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow-wrap:anywhere;transition:transform .18s}
+.result.reveal{animation:reveal .55s ease-out}@keyframes reveal{0%{transform:scale(.92);background:#6b2e89}65%{transform:scale(1.04)}100%{transform:scale(1);background:#3a204d}}
+.result-label{font-size:12px;color:#e4c8f8;margin-bottom:6px}.result-text{font-size:clamp(19px,4.5vw,25px);font-weight:900;line-height:1.55}.result-text.dialogue{font-size:clamp(17px,4vw,21px)}
+.item-list{text-align:left;max-width:500px;margin:20px auto 0;padding:12px 15px;background:#21142f;border-radius:14px}.item-list summary{cursor:pointer;font-weight:800;color:#ffca72}.item-list ol{padding-left:24px;line-height:1.8;font-size:13px}.item-list li{padding:2px 0;overflow-wrap:anywhere}footer{margin-top:20px;color:#bda6d0;font-size:12px}
 </style>
 </head>
 <body>
-<header>
-  <div style="font-size:35px">🎃 👻 🦇</div>
-  <h1>ハロウィン・ルーレット</h1>
-  <p class="subtitle">運命のルーレット、スタート！ ✨</p>
-</header>
-
-<nav class="tabs">
-  <button class="tab active" data-panel="halloween">🎃 ハロウィン</button>
-  <button class="tab" data-panel="dialogue">🗣️ セリフ</button>
-</nav>
-
+<header><div style="font-size:35px">🎃 👻 🦇</div><h1>ハロウィン・ルーレット</h1><p class="subtitle">運命のルーレット、スタート！ ✨</p></header>
+<nav class="tabs"><button class="tab active" data-panel="halloween">🎃 ハロウィン</button><button class="tab" data-panel="dialogue">🗣️ セリフ</button></nav>
 <section class="panel active" id="halloween">
-  <h2>🎃 ハロウィンルーレット 🎃</h2>
-  <p class="description">何が当たるかは回してからのお楽しみ！</p>
-  <div class="wheel-wrap">
-    <div class="pointer"></div>
-    <canvas id="wheel-halloween" width="700" height="700"></canvas>
-  </div>
-  <button class="spin" data-wheel="halloween">🎃 ルーレットを回す！</button>
-  <div class="result" aria-live="polite">
-    <div class="result-label">✨ 結果発表 ✨</div>
-    <div class="result-text" id="result-halloween">ここに結果が出るよ！</div>
-  </div>
-  <details class="item-list">
-    <summary>ルーレットの項目を見る</summary>
-    <ol id="list-halloween"></ol>
-  </details>
-</section>
-
+<h2>🎃 ハロウィンルーレット 🎃</h2><p class="description">何が当たるかは回してからのお楽しみ！</p>
+<div class="wheel-wrap"><div class="pointer"></div><canvas id="wheel-halloween" width="700" height="700"></canvas></div>
+<button class="spin" data-wheel="halloween">🎃 ルーレットを回す！</button><p class="sound-note">🔊 回転中はドラムロール、停止時はファンファーレ！</p>
+<div class="result" aria-live="polite"><div class="result-label">✨ 結果発表 ✨</div><div class="result-text" id="result-halloween">ここに結果が出るよ！</div></div>
+<details class="item-list"><summary>ルーレットの項目を見る</summary><ol id="list-halloween"></ol></details></section>
 <section class="panel" id="dialogue">
-  <h2>🗣️ セリフルーレット 🗣️</h2>
-  <p class="description">どのセリフが選ばれるかな？</p>
-  <div class="wheel-wrap">
-    <div class="pointer"></div>
-    <canvas id="wheel-dialogue" width="700" height="700"></canvas>
-  </div>
-  <button class="spin" data-wheel="dialogue">🗣️ セリフを回す！</button>
-  <div class="result" aria-live="polite">
-    <div class="result-label">💬 選ばれたセリフ 💬</div>
-    <div class="result-text dialogue" id="result-dialogue">ここにセリフが出るよ！</div>
-  </div>
-  <details class="item-list">
-    <summary>セリフ一覧を見る</summary>
-    <ol id="list-dialogue"></ol>
-  </details>
-</section>
-
+<h2>🗣️ セリフルーレット 🗣️</h2><p class="description">どのセリフが選ばれるかな？</p>
+<div class="wheel-wrap"><div class="pointer"></div><canvas id="wheel-dialogue" width="700" height="700"></canvas></div>
+<button class="spin" data-wheel="dialogue">🗣️ セリフを回す！</button><p class="sound-note">🔊 回転中はドラムロール、停止時はファンファーレ！</p>
+<div class="result" aria-live="polite"><div class="result-label">💬 選ばれたセリフ 💬</div><div class="result-text dialogue" id="result-dialogue">ここに結果が出るよ！</div></div>
+<details class="item-list"><summary>セリフ一覧を見る</summary><ol id="list-dialogue"></ol></details></section>
 <footer>🕸️ Happy Halloween! 🕸️</footer>
-
 <script>
-const halloweenItems = [
-  "🎁ハロウィンアイコン・イラスト",
-  "🎁ハロウィンアイコン・実写(顔)",
-  "🎁ハロウィンアイコン・実写(全身)",
-  "🎁スクショタイム(名前入)",
-  "🎁みゅうがリスナーを褒める",
-  "🎁リスナーがみゅうを褒める",
-  "🎁１週間改名",
-  "🎁セリフ",
-  "🙅ハズレ",
-  "💀追加でハロウィンアイテム"
-];
-
-const dialogueItems = [
-  "①「〇〇、お菓子くれないと、いたずらしちゃうぞ？ ……それとも、いたずらされたい？」",
-  "②「トリック・オア・トリート！ お菓子はいらないから、〇〇〇...ぎゅーして？」",
-  "③「〇〇、お菓子あげるから、私にいたずらしていいよ？」",
-  "④「〇〇、今日だけは、君だけの特別な女の子にしてね」",
-  "⑤「〇〇、オオカミ男になって、私を食べちゃってもいいんだよ？」",
-  "⑥「はい、今日の患者さんは君ね。……いたずらされたい？ それとも、私にされたい？」",
-  "⑦「お菓子くれないと、おっきい注射しちゃうぞ？ ……なんてね」",
-  "⑧「ねえ、ちょっと胸の音聞かせて？ ……わ、すごくドキドキしてる。私のせい、かな？」",
-  "⑨「ちょっと熱測るね。（おでこをコツンと合わせて）……うん、私のほうが君にのぼせちゃってるかも」",
-  "⑩「今日だけは、君だけの専属ナース。どこが痛くても、寂しくても、私がぜんぶ治してあげる」",
-  "⑪「ハロウィンの夜くらい、悪いお化けから私を守って？ 頼りにしてるよ、私のヒーロー」"
-];
-
-const configs = {
-  halloween: {
-    items: halloweenItems,
-    canvas: document.getElementById("wheel-halloween"),
-    result: document.getElementById("result-halloween"),
-    colors: ["#6c2c91","#f28c28","#392052","#ffb13b","#8438a8",
-             "#d95f25","#4b2868","#e7a02c","#26172f","#a94d24"]
-  },
-  dialogue: {
-    items: dialogueItems,
-    canvas: document.getElementById("wheel-dialogue"),
-    result: document.getElementById("result-dialogue"),
-    colors: ["#6c2c91","#f28c28","#392052","#ffb13b","#8438a8",
-             "#d95f25","#4b2868","#e7a02c","#26172f","#a94d24","#75409b"]
-  }
-};
-
-const states = {
-  halloween: { angle: 0, spinning: false },
-  dialogue: { angle: 0, spinning: false }
-};
-
-function drawWheel(key) {
-  const cfg = configs[key];
-  const canvas = cfg.canvas;
-  const ctx = canvas.getContext("2d");
-  const items = cfg.items;
-  const n = items.length;
-  const cx = canvas.width / 2;
-  const cy = canvas.height / 2;
-  const radius = 325;
-  const arc = Math.PI * 2 / n;
-  const angle = states[key].angle;
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  items.forEach((item, i) => {
-    const start = angle - Math.PI / 2 + i * arc;
-    const end = start + arc;
-
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, radius, start, end);
-    ctx.closePath();
-    ctx.fillStyle = cfg.colors[i % cfg.colors.length];
-    ctx.fill();
-    ctx.strokeStyle = "#ffe4ae";
-    ctx.lineWidth = 3;
-    ctx.stroke();
-
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(start + arc / 2);
-    ctx.textAlign = "right";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#ffffff";
-    ctx.shadowColor = "#180c22";
-    ctx.shadowBlur = 3;
-
-    if (key === "halloween") {
-      ctx.font = "bold 20px sans-serif";
-      const shortLabels = [
-        "アイコン・イラスト","実写アイコン（顔）","実写アイコン（全身）",
-        "スクショタイム","みゅうが褒める","みゅうを褒める",
-        "１週間改名","セリフ","ハズレ","追加アイテム"
-      ];
-      ctx.fillText(shortLabels[i], radius - 18, 0, 230);
-    } else {
-      ctx.font = "bold 27px sans-serif";
-      ctx.fillText("セリフ " + (i + 1), radius - 20, 0, 200);
-    }
-    ctx.restore();
-  });
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, 57, 0, Math.PI * 2);
-  ctx.fillStyle = "#fff0c7";
-  ctx.fill();
-  ctx.strokeStyle = "#d98b35";
-  ctx.lineWidth = 8;
-  ctx.stroke();
-  ctx.fillStyle = "#542080";
-  ctx.font = "bold 34px sans-serif";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText("🎃", cx, cy + 2);
+const halloweenItems=["🎁ハロウィンアイコン・イラスト","🎁ハロウィンアイコン・実写(顔)","🎁ハロウィンアイコン・実写(全身)","🎁スクショタイム(名前入)","🎁みゅうがリスナーを褒める","🎁リスナーがみゅうを褒める","🎁１週間改名","🎁セリフ","🙅ハズレ","💀追加でハロウィンアイテム"];
+const dialogueItems=[
+"①「〇〇、お菓子くれないと、いたずらしちゃうぞ？ ……それとも、いたずらされたい？」",
+"②「トリック・オア・トリート！ お菓子はいらないから、〇〇〇...ぎゅーして？」",
+"③「〇〇、お菓子あげるから、私にいたずらしていいよ？」",
+"④「〇〇、今日だけは、君だけの特別な女の子にしてね」",
+"⑤「〇〇、オオカミ男になって、私を食べちゃってもいいんだよ？」",
+"⑥「はい、今日の患者さんは君ね。……いたずらされたい？ それとも、私にされたい？」",
+"⑦「お菓子くれないと、おっきい注射しちゃうぞ？ ……なんてね」",
+"⑧「ねえ、ちょっと胸の音聞かせて？ ……わ、すごくドキドキしてる。私のせい、かな？」",
+"⑨「ちょっと熱測るね。（おでこをコツンと合わせて）……うん、私のほうが君にのぼせちゃってるかも」",
+"⑩「今日だけは、君だけの専属ナース。どこが痛くても、寂しくても、私がぜんぶ治してあげる」",
+"⑪「ハロウィンの夜くらい、悪いお化けから私を守って？ 頼りにしてるよ、私のヒーロー」"];
+const configs={
+halloween:{items:halloweenItems,canvas:document.getElementById("wheel-halloween"),result:document.getElementById("result-halloween"),colors:["#6c2c91","#f28c28","#392052","#ffb13b","#8438a8","#d95f25","#4b2868","#e7a02c","#26172f","#a94d24"]},
+dialogue:{items:dialogueItems,canvas:document.getElementById("wheel-dialogue"),result:document.getElementById("result-dialogue"),colors:["#6c2c91","#f28c28","#392052","#ffb13b","#8438a8","#d95f25","#4b2868","#e7a02c","#26172f","#a94d24","#75409b"]}};
+const states={halloween:{angle:0,spinning:false},dialogue:{angle:0,spinning:false}};
+/* 音源ファイル不要。Web Audio APIでドラムロールとオリジナルのファンファーレを合成 */
+let audioContext=null,drumTimer=null,drumNoise=null,drumGain=null;
+function getAudioContext(){const A=window.AudioContext||window.webkitAudioContext;if(!A)return null;if(!audioContext)audioContext=new A();if(audioContext.state==="suspended")audioContext.resume();return audioContext;}
+function stopDrumRoll(){if(drumTimer){clearInterval(drumTimer);drumTimer=null;}if(drumNoise){try{drumNoise.stop();}catch(e){}drumNoise.disconnect();drumNoise=null;}if(drumGain){drumGain.disconnect();drumGain=null;}}
+function startDrumRoll(){
+ const ctx=getAudioContext();if(!ctx)return;stopDrumRoll();
+ const buffer=ctx.createBuffer(1,Math.floor(ctx.sampleRate*1.5),ctx.sampleRate),data=buffer.getChannelData(0);
+ for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*0.8;
+ drumNoise=ctx.createBufferSource();drumNoise.buffer=buffer;drumNoise.loop=true;
+ const filter=ctx.createBiquadFilter();filter.type="bandpass";filter.frequency.value=950;filter.Q.value=.7;
+ drumGain=ctx.createGain();drumGain.gain.setValueAtTime(.0001,ctx.currentTime);drumGain.gain.linearRampToValueAtTime(.10,ctx.currentTime+.15);
+ drumNoise.connect(filter);filter.connect(drumGain);drumGain.connect(ctx.destination);drumNoise.start();
+ let step=0;drumTimer=setInterval(()=>{if(!audioContext||audioContext.state!=="running")return;const now=ctx.currentTime;
+ const o=ctx.createOscillator(),g=ctx.createGain();o.type="triangle";o.frequency.setValueAtTime(step%4===0?115:155,now);o.frequency.exponentialRampToValueAtTime(65,now+.075);
+ g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(.14,now+.008);g.gain.exponentialRampToValueAtTime(.0001,now+.09);
+ o.connect(g);g.connect(ctx.destination);o.start(now);o.stop(now+.1);step++;},75);
 }
-
-function populateLists() {
-  for (const key of Object.keys(configs)) {
-    const list = document.getElementById("list-" + key);
-    configs[key].items.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      list.appendChild(li);
-    });
-  }
+function playFanfare(){
+ const ctx=getAudioContext();if(!ctx)return;stopDrumRoll();const now=ctx.currentTime;
+ [{f:523.25,t:0,d:.16},{f:659.25,t:.17,d:.16},{f:783.99,t:.34,d:.22},{f:1046.5,t:.58,d:.62},{f:783.99,t:.58,d:.62},{f:659.25,t:.58,d:.62}].forEach(n=>{
+  const o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain();o.type="sawtooth";o.frequency.value=n.f;o2.type="triangle";o2.frequency.value=n.f*1.005;
+  const s=now+n.t,e=s+n.d;g.gain.setValueAtTime(.0001,s);g.gain.linearRampToValueAtTime(.09,s+.025);g.gain.setValueAtTime(.07,Math.max(s+.03,e-.08));g.gain.exponentialRampToValueAtTime(.0001,e);
+  o.connect(g);o2.connect(g);g.connect(ctx.destination);o.start(s);o2.start(s);o.stop(e);o2.stop(e);
+ });
+ const b=ctx.createOscillator(),bg=ctx.createGain();b.type="sine";b.frequency.setValueAtTime(105,now);b.frequency.exponentialRampToValueAtTime(42,now+.32);
+ bg.gain.setValueAtTime(.0001,now);bg.gain.exponentialRampToValueAtTime(.24,now+.015);bg.gain.exponentialRampToValueAtTime(.0001,now+.38);b.connect(bg);bg.connect(ctx.destination);b.start(now);b.stop(now+.4);
 }
-
-document.querySelectorAll(".tab").forEach(tab => {
-  tab.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-    tab.classList.add("active");
-    document.getElementById(tab.dataset.panel).classList.add("active");
-  });
-});
-
-function getSelectedIndex(key) {
-  const cfg = configs[key];
-  const n = cfg.items.length;
-  const arc = Math.PI * 2 / n;
-  const angle = ((states[key].angle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-  let index = Math.floor((Math.PI * 2 - angle + arc / 2) % (Math.PI * 2) / arc);
-  return Math.min(index, n - 1);
+function drawWheel(key){
+ const c=configs[key],ctx=c.canvas.getContext("2d"),n=c.items.length,cx=c.canvas.width/2,cy=c.canvas.height/2,r=325,arc=Math.PI*2/n,a=states[key].angle;ctx.clearRect(0,0,c.canvas.width,c.canvas.height);
+ c.items.forEach((item,i)=>{const s=a-Math.PI/2+i*arc,e=s+arc;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,s,e);ctx.closePath();ctx.fillStyle=c.colors[i%c.colors.length];ctx.fill();ctx.strokeStyle="#ffe4ae";ctx.lineWidth=3;ctx.stroke();
+ ctx.save();ctx.translate(cx,cy);ctx.rotate(s+arc/2);ctx.textAlign="right";ctx.textBaseline="middle";ctx.fillStyle="#fff";ctx.shadowColor="#180c22";ctx.shadowBlur=3;
+ if(key==="halloween"){ctx.font="bold 20px sans-serif";const labels=["アイコン・イラスト","実写アイコン（顔）","実写アイコン（全身）","スクショタイム","みゅうが褒める","みゅうを褒める","１週間改名","セリフ","ハズレ","追加アイテム"];ctx.fillText(labels[i],r-18,0,230);}else{ctx.font="bold 27px sans-serif";ctx.fillText("セリフ "+(i+1),r-20,0,200);}ctx.restore();});
+ ctx.beginPath();ctx.arc(cx,cy,57,0,Math.PI*2);ctx.fillStyle="#fff0c7";ctx.fill();ctx.strokeStyle="#d98b35";ctx.lineWidth=8;ctx.stroke();ctx.fillStyle="#542080";ctx.font="bold 34px sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("🎃",cx,cy+2);
 }
-
-function spin(key, button) {
-  const state = states[key];
-  if (state.spinning) return;
-
-  state.spinning = true;
-  button.disabled = true;
-  button.textContent = "🌀 回転中…";
-  configs[key].result.textContent = "ドキドキ……！";
-
-  const startAngle = state.angle;
-  const extraTurns = (6 + Math.random() * 4) * Math.PI * 2;
-  const targetAngle = startAngle + extraTurns + Math.random() * Math.PI * 2;
-  const duration = 4600;
-  const startTime = performance.now();
-
-  function animate(now) {
-    const t = Math.min((now - startTime) / duration, 1);
-    const eased = 1 - Math.pow(1 - t, 4);
-    state.angle = startAngle + (targetAngle - startAngle) * eased;
-    drawWheel(key);
-
-    if (t < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      state.angle = targetAngle;
-      drawWheel(key);
-
-      // The pointer is at the top. Pick the sector under it.
-      const n = configs[key].items.length;
-      const arc = Math.PI * 2 / n;
-      const normalized = ((state.angle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-      const index = Math.floor((((Math.PI * 2 - normalized) % (Math.PI * 2)) + arc / 2) % (Math.PI * 2) / arc);
-      const safeIndex = Math.min(index, n - 1);
-      const selected = configs[key].items[safeIndex];
-
-      configs[key].result.textContent = selected;
-      state.spinning = false;
-      button.disabled = false;
-      button.textContent = key === "halloween"
-        ? "🎃 もう一度回す！"
-        : "🗣️ もう一度回す！";
-    }
-  }
-  requestAnimationFrame(animate);
+function populateLists(){for(const k of Object.keys(configs)){const list=document.getElementById("list-"+k);configs[k].items.forEach(item=>{const li=document.createElement("li");li.textContent=item;list.appendChild(li);});}}
+document.querySelectorAll(".tab").forEach(tab=>tab.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));tab.classList.add("active");document.getElementById(tab.dataset.panel).classList.add("active");}));
+function selectedIndex(key){const n=configs[key].items.length,arc=Math.PI*2/n,rotation=((states[key].angle%(Math.PI*2))+Math.PI*2)%(Math.PI*2);return Math.min(n-1,Math.floor(((Math.PI*2-rotation)%(Math.PI*2))/arc));}
+function spin(key,button){
+ const st=states[key];if(st.spinning)return;st.spinning=true;button.disabled=true;button.textContent="🌀 回転中…";
+ const c=configs[key];c.result.classList.remove("reveal");c.result.querySelector(".result-text").textContent="ドキドキ……！";getAudioContext();startDrumRoll();
+ const start=st.angle,target=start+(6+Math.random()*4)*Math.PI*2+Math.random()*Math.PI*2,duration=4600,begin=performance.now();
+ function animate(now){const t=Math.min((now-begin)/duration,1),ease=1-Math.pow(1-t,4);st.angle=start+(target-start)*ease;drawWheel(key);
+ if(t<1){requestAnimationFrame(animate);}else{st.angle=target;drawWheel(key);const result=c.items[selectedIndex(key)];stopDrumRoll();playFanfare();c.result.querySelector(".result-text").textContent=result;c.result.classList.remove("reveal");void c.result.offsetWidth;c.result.classList.add("reveal");st.spinning=false;button.disabled=false;button.textContent=key==="halloween"?"🎃 もう一度回す！":"🗣️ もう一度回す！";}}
+ requestAnimationFrame(animate);
 }
-
-document.querySelectorAll(".spin").forEach(button => {
-  button.addEventListener("click", () => spin(button.dataset.wheel, button));
-});
-
-populateLists();
-drawWheel("halloween");
-drawWheel("dialogue");
+document.querySelectorAll(".spin").forEach(b=>b.addEventListener("click",()=>spin(b.dataset.wheel,b)));
+populateLists();drawWheel("halloween");drawWheel("dialogue");
 </script>
 </body>
 </html>
